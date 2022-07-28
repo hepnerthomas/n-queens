@@ -79,13 +79,51 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      //I: row index
+      //O: boolean
+      //C:
+      //E:
+
+      // strategy: get the row (array with row values), iterate through the array. If we see a 1 in any index, return false. otherwise, return true.
+      var row = this.get(rowIndex);
+      var counter = 0;
+      // Note: Why doesn't this forEach function?
+      // row.forEach(function(element) {
+      //   if (element === 1) {
+      //     counter++;
+      //   }
+      //   if (counter > 1) {
+      //     return true;
+      //   }
+      // })
+      for (var i = 0; i < row.length; i++) {
+        if (row[i] == 1) {
+          counter++;
+        }
+        if (counter > 1) {
+          return true;
+        }
+      }
+
+
+      return false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      //I:none
+      //O: boolean
+      //strat: get an array of rows. for each row, run hasRowConflictAt() and store the result. if hasRowConliftAt(), then return true. otherwise, return false.
+      // var rows = window.Board.prototype.rows;
+      var rows = this.rows();
+      for (var i = 0; i < rows.length; i++) {
+        if (this.hasRowConflictAt(i)) {
+          return true;
+        }
+      }
+        return false;
     },
+
 
 
 
@@ -94,11 +132,48 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      // I - colIndex (value)
+      // O - boolean
+      // C - none
+      // E - none
+
+      // Pseudocode / Strategy:
+      // Get the board
+      var rows = this.rows();
+      var counter = 0;
+      // check each index at each row to see if there is a conflict in the column
+      for (var row of rows) {
+        var colValue = row[colIndex];
+        if (colValue === 1) {
+          counter++;
+        }
+        if (counter > 1) {
+          return true;
+        }
+      }
+      // if conflict, return true, otherwise return false
+      return false;
+
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      // I - none.
+      // O - boolean
+      // C- none
+      // E - none
+
+      // Pseudocode:
+      // use hasColConflictAt to check if each colIndex
+      var numColumns = this.rows()[0].length;
+
+      // iterate over colIndexes and calling function on each colIndex
+      for (let i = 0; i < numColumns; i++) {
+        // if hasColConflictAt returns true, then return true, otherwise return false
+        if (this.hasColConflictAt(i)) {
+          return true;
+        }
+      }
       return false; // fixme
     },
 
