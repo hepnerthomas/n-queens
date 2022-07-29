@@ -184,12 +184,86 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      //I: majorDiagonal.... (top left to bottom right)
+      //O: Boolean
+      // Strategy: get the rows
+
+      //pseudocode: get rows, get the n value, create a counter variable.
+
+      // var n = this.get('n'); // 4
+      // var counter = 0; // counter = 0
+      // // create stopping value equal to n - 1 - mdciafr
+      // var stop = n - majorDiagonalColumnIndexAtFirstRow; // 3
+      // //iterate through rows (last row is the index value), (n = 5, 5x5, index is at 2, so we can to iterate through rows 0 to 2, and columns 2 to 4)
+      // for (var i = 0; i < stop; i++) { // i = 0
+      //   //get current row, get the element value at rows.get(i)
+      //   console.log('Row ' + i + ' , Column ' + (i + majorDiagonalColumnIndexAtFirstRow));
+      //   var current = this.get(i)[i + majorDiagonalColumnIndexAtFirstRow];
+      //   console.log('Value: ', current);
+      //     // row[i + majorDiag....Row] -- check this value
+      //     if (current === 1) {
+      //        // check value at index + i -- if it's 1,
+      //         //increment the counter
+      //         counter++;
+      //     }
+      //     // check if counter is greater than 1,
+      //     if (counter > 1) {
+      //       // if so, return true
+      //       return true;
+      //     }
+      // }
+      // return false;
+
+      var n = this.get('n'); // 4
+      // create stopping value equal to n - 1 - mdciafr
+      var stop = n - majorDiagonalColumnIndexAtFirstRow; //4
+      //iterate through rows (last row is the index value), (n = 5, 5x5, index is at 2, so we can to iterate through rows 0 to 2, and columns 2 to 4)
+      for (var j = 0; j < this.rows().length; j++) { //j = 0
+        var counter = 0; // counter = 0
+        var row = this.get(j);
+
+        for (var i = 0; i < n - j; i++) { // i = 0 stop = 3
+          //get current row, get the element value at rows.get(i)
+          // console.log('Row ' + i + ' , Column ' + (i + majorDiagonalColumnIndexAtFirstRow));
+          var current = this.get(j + i)[i + majorDiagonalColumnIndexAtFirstRow];
+          // console.log('Value: ', current);
+            // row[i + majorDiag....Row] -- check this value
+            if (current === 1) {
+              // check value at index + i -- if it's 1,
+                //increment the counter
+                counter++;
+            }
+            // check if counter is greater than 1,
+            if (counter > 1) {
+              // if so, return true
+              return true;
+            }
+        }
+      }
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      //I none
+      // O: boolean
+      //strat: iterate from 0 through n
+      var n = this.get('n'); // 4
+      for (var i = 0; i < n; i++) {//only testing half of the board (use 1 -n for i) // i=0 (through 3)
+        // for each index, call hasMajorDiagonalConflictAt function
+        //this.hasMajorDiagonalConflictAt(i);
+        // if hmdca is true,
+        //console.log(this.hasMajorDiagonalConflictAt(i));
+
+        if (this.hasMajorDiagonalConflictAt(i)) { // majorDiagonalCon... = 0
+          // return true
+          return true;
+        }
+
+      }
+
+
+      return false;
     },
 
 
@@ -199,12 +273,53 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var n = this.get('n'); // 4
+      // create stopping value equal to n - 1 - mdciafr
+      var stop = n - minorDiagonalColumnIndexAtFirstRow; //4
+      //iterate through rows (last row is the index value), (n = 5, 5x5, index is at 2, so we can to iterate through rows 0 to 2, and columns 2 to 4)
+      for (var j = 0; j < this.rows().length; j++) { //j = 0
+        var counter = 0; // counter = 0
+        var row = this.get(j);
+
+        for (var i = 0; i < n - j; i++) { // i = 0 stop = 3
+          //get current row, get the element value at rows.get(i)
+          // console.log('Row ' + i + ' , Column ' + (i + minorDiagonalColumnIndexAtFirstRow));
+          var current = this.get(j + i)[minorDiagonalColumnIndexAtFirstRow - i];
+          // console.log('Value: ', current);
+            // row[i + majorDiag....Row] -- check this value
+            if (current === 1) {
+              // check value at index + i -- if it's 1,
+                //increment the counter
+                counter++;
+            }
+            // check if counter is greater than 1,
+            if (counter > 1) {
+              // if so, return true
+              return true;
+            }
+        }
+      }
+      return false;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      var n = this.get('n'); // 4
+      for (var i = 0; i < n; i++) {//only testing half of the board (use 1 -n for i) // i=0 (through 3)
+        // for each index, call hasMajorDiagonalConflictAt function
+        //this.hasMajorDiagonalConflictAt(i);
+        // if hmdca is true,
+        //console.log(this.hasMajorDiagonalConflictAt(i));
+
+        if (this.hasMinorDiagonalConflictAt(i)) { // majorDiagonalCon... = 0
+          // return true
+          return true;
+        }
+
+      }
+
+
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
